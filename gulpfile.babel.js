@@ -32,7 +32,7 @@ const revLogger = new RevLogger({
 
 
 // css
-gulp.task('copy-bower-css', () => { 
+gulp.task('copy-module-css', () => { 
   return gulp.src(
     [
       'material-design-lite/material.min.css',
@@ -54,12 +54,12 @@ gulp.task('sass', () => {
   ;
 });
 
-// gulp.task('css', gulp.series(gulp.parallel('sass', 'copy-bower-css')));
+// gulp.task('css', gulp.series(gulp.parallel('sass', 'copy-module-css')));
 gulp.task('css', gulp.series('sass'));
 
 
 // js
-gulp.task('copy-bower-js', () => { 
+gulp.task('copy-module-js', () => { 
   return gulp.src(
     [
       // 'material-design-lite/material.min.js',
@@ -104,8 +104,8 @@ gulp.task('deco', () => {
   ;
 });
 
-// gulp.task 'js', gulp.parallel('browserify', 'copy-bower-js')
-gulp.task('js', gulp.series(gulp.parallel('browserify', 'copy-bower-js'), gulp.parallel('minify', 'deco')));
+// gulp.task 'js', gulp.parallel('browserify', 'copy-module-js')
+gulp.task('js', gulp.series(gulp.parallel('browserify', 'copy-module-js'), gulp.parallel('minify', 'deco')));
 
 
 // html
