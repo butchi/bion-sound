@@ -1,0 +1,25 @@
+.bion-container {
+  position: relative;
+
+  width: 512px;
+  height: 512px;
+
+  .coord {
+    position: absolute;
+    left: 256px;
+    top: 256px;
+  }
+
+  .bion-elm {
+    display: block;
+    position: absolute;
+
+    .number {
+      display: inline-block;
+
+      color: $black;
+
+      font-size: 16px;
+    }
+  }
+}

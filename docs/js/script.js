@@ -1,4 +1,22 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.bion = bion;
+var PI = Math.PI,
+    sin = Math.sin,
+    cos = Math.cos,
+    log2 = Math.log2;
+function bion(n) {
+  var x = log2(n) * cos(2 * PI * log2(n));
+  var y = log2(n) * sin(2 * PI * log2(n));
+
+  return { x: x, y: y };
+}
+
+},{}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44,7 +62,7 @@ var Main = function () {
 
 exports.default = Main;
 
-},{"./Router":2}],2:[function(require,module,exports){
+},{"./Router":3}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -98,7 +116,7 @@ var Router = function () {
 
 exports.default = Router;
 
-},{"../page/common":4,"../page/index":5,"./ns":3}],3:[function(require,module,exports){
+},{"../page/common":5,"../page/index":6,"./ns":4}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -113,7 +131,7 @@ window.App = window.App || {};
 var ns = window.App;
 exports.default = ns;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -150,7 +168,7 @@ function setEnvClass() {
   }
 }
 
-},{"../module/ns":3}],5:[function(require,module,exports){
+},{"../module/ns":4}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -161,13 +179,38 @@ var _ns = require('../module/ns');
 
 var _ns2 = _interopRequireDefault(_ns);
 
+var _BMath = require('../module/BMath');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function () {
-  console.log('index page');
+  var elm = document.querySelector('.bion-container');
+  var $elm = $(elm);
+
+  var $coord = $('<div class="coord"></div>');
+
+  $elm.append($coord);
+
+  for (var i = 1; i <= 32; i++) {
+    var b = (0, _BMath.bion)(i);
+
+    var $bion = $('<div class="bion-elm"></div>');
+
+    var $number = $('<span class="number">');
+    $number.text(i);
+
+    $bion.append($number);
+
+    $coord.append($bion);
+
+    $bion.css({
+      left: b.x * 50,
+      top: -b.y * 50
+    });
+  }
 };
 
-},{"../module/ns":3}],6:[function(require,module,exports){
+},{"../module/BMath":1,"../module/ns":4}],7:[function(require,module,exports){
 'use strict';
 
 var _ns = require('./module/ns');
@@ -184,4 +227,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _ns2.default.main = new _Main2.default();
 
-},{"./module/Main":1,"./module/ns":3}]},{},[6]);
+},{"./module/Main":2,"./module/ns":4}]},{},[7]);

@@ -104,6 +104,22 @@ html.is-sp .wrapper {
 
 html.is-pc .wrapper {
   width: 100%;
-  min-width: 1200px;
-  min-width: 12rem;
+  min-width: 800px;
+  min-width: 8rem;
   overflow: hidden; }
+
+.bion-container {
+  position: relative;
+  width: 512px;
+  height: 512px; }
+  .bion-container .coord {
+    position: absolute;
+    left: 256px;
+    top: 256px; }
+  .bion-container .bion-elm {
+    display: block;
+    position: absolute; }
+    .bion-container .bion-elm .number {
+      display: inline-block;
+      color: #000000;
+      font-size: 16px; }
