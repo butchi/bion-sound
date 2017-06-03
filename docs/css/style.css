@@ -111,15 +111,44 @@ html.is-pc .wrapper {
 .bion-container {
   position: relative;
   width: 512px;
-  height: 512px; }
+  width: 5.12rem;
+  height: 512px;
+  height: 5.12rem; }
   .bion-container .coord {
     position: absolute;
     left: 256px;
-    top: 256px; }
+    left: 2.56rem;
+    top: 256px;
+    top: 2.56rem; }
   .bion-container .bion-elm {
     display: block;
     position: absolute; }
+    .bion-container .bion-elm .bg {
+      position: absolute;
+      width: 40px;
+      width: 0.4rem;
+      height: 40px;
+      height: 0.4rem;
+      left: -20px;
+      left: -0.2rem;
+      top: -20px;
+      top: -0.2rem;
+      background-color: #ccf;
+      border-radius: 50%; }
     .bion-container .bion-elm .number {
-      display: inline-block;
-      color: #000000;
-      font-size: 16px; }
+      display: block;
+      position: absolute;
+      width: 40px;
+      width: 0.4rem;
+      height: 40px;
+      height: 0.4rem;
+      left: -20px;
+      left: -0.2rem;
+      top: -20px;
+      top: -0.2rem;
+      line-height: 40px;
+      line-height: 0.4rem;
+      text-align: center;
+      color: #ffffff;
+      font-size: 16px;
+      font-size: 0.16rem; }
