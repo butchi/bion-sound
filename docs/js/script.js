@@ -22627,9 +22627,8 @@ var _BMath = require('../module/BMath');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function () {
-  var SYNTH_LENGTH = 10;
-
-  var synthArr = new Array(SYNTH_LENGTH).fill(null).map(function () {
+  var TONE_LENGTH = 32;
+  var synthArr = new Array(TONE_LENGTH).fill(null).map(function () {
     return new _tone2.default.Synth({
       "oscillator": {
         "type": "square"
@@ -22643,8 +22642,6 @@ exports.default = function () {
     }).toMaster();
   });
 
-  var synthIndex = 0;
-
   var elm = document.querySelector('.bion-container');
   var $elm = $(elm);
 
@@ -22652,10 +22649,10 @@ exports.default = function () {
 
   $elm.append($coord);
 
-  for (var i = 1; i <= 32; i++) {
+  for (var i = 1; i <= TONE_LENGTH; i++) {
     var b = (0, _BMath.bion)(i);
 
-    var $bion = $('<div class="bion-elm" data-index="' + i + '" data-freq="' + i * 80 + '"></div>');
+    var $bion = $('<div class="bion-elm" data-index="' + (i - 1) + '" data-freq="' + i * 80 + '"></div>');
 
     var $bg = $('<div class="bg"></div>');
 
@@ -22673,14 +22670,33 @@ exports.default = function () {
     });
   }
 
+  $elm.on('click', '.bion-elm', function (evt) {
+    var $b = $(evt.target).closest('.bion-elm');
+    var freq = parseInt($b.attr('data-freq'));
+    var synthIndex = parseInt($b.attr('data-index'));
+    var isContinue = !!$b.attr('data-is-continue');
+
+    var synth = synthArr[synthIndex];
+
+    if (isContinue) {
+      synth.triggerRelease();
+      $b.removeAttr('data-is-continue');
+    } else {
+      synth.triggerAttack(freq);
+      $b.attr('data-is-continue', true);
+    }
+  });
+
   $elm.on('mouseover touchstart', '.bion-elm', function (evt) {
     var $b = $(evt.target).closest('.bion-elm');
     var freq = parseInt($b.attr('data-freq'));
+    var synthIndex = parseInt($b.attr('data-index'));
+    var isContinue = !!$b.attr('data-is-continue');
 
-    var synth = synthArr[synthIndex];
-    synth.triggerAttackRelease(freq, 0.1);
-
-    synthIndex = (synthIndex + 1) % SYNTH_LENGTH;
+    if (!isContinue) {
+      var synth = synthArr[synthIndex];
+      synth.triggerAttackRelease(freq, 0.1);
+    }
   });
 };
 

@@ -5,9 +5,8 @@ import ns from '../module/ns';
 import { bion } from '../module/BMath';
 
 export default () => {
-  const SYNTH_LENGTH = 10;
-
-  const synthArr = new Array(SYNTH_LENGTH).fill(null).map(() => {
+  const TONE_LENGTH = 32;
+  const synthArr = new Array(TONE_LENGTH).fill(null).map(() => {
     return new Tone.Synth({
       "oscillator" : {
         "type" : "square"
@@ -21,8 +20,6 @@ export default () => {
     }).toMaster();
   });
 
-  let synthIndex = 0;
-
   const elm = document.querySelector('.bion-container');
   const $elm = $(elm);
 
@@ -30,10 +27,10 @@ export default () => {
 
   $elm.append($coord);
 
-  for (let i = 1; i <= 32; i++) {
+  for (let i = 1; i <= TONE_LENGTH; i++) {
     const b = bion(i);
 
-    let $bion = $(`<div class="bion-elm" data-index="${i}" data-freq="${i * 80}"></div>`);
+    let $bion = $(`<div class="bion-elm" data-index="${i - 1}" data-freq="${i * 80}"></div>`);
 
     let $bg = $('<div class="bg"></div>');
 
@@ -51,13 +48,32 @@ export default () => {
     });
   }
 
+  $elm.on('click', '.bion-elm', (evt) => {
+    const $b = $(evt.target).closest('.bion-elm');
+    const freq = parseInt($b.attr('data-freq'));
+    const synthIndex = parseInt($b.attr('data-index'));
+    const isContinue = !!$b.attr('data-is-continue');
+
+    const synth = synthArr[synthIndex];
+
+    if (isContinue) {
+      synth.triggerRelease();
+      $b.removeAttr('data-is-continue');
+    } else {
+      synth.triggerAttack(freq);
+      $b.attr('data-is-continue', true);
+    }
+  });
+
   $elm.on('mouseover touchstart', '.bion-elm', (evt) => {
     const $b = $(evt.target).closest('.bion-elm');
     const freq = parseInt($b.attr('data-freq'));
+    const synthIndex = parseInt($b.attr('data-index'));
+    const isContinue = !!$b.attr('data-is-continue');
 
-    const synth = synthArr[synthIndex];
-    synth.triggerAttackRelease(freq, 0.1);
-
-    synthIndex = (synthIndex + 1) % SYNTH_LENGTH;
+    if (!isContinue) {
+      const synth = synthArr[synthIndex];
+      synth.triggerAttackRelease(freq, 0.1);
+    }
   });
 }

@@ -28,6 +28,12 @@
       border-radius: 50%;
     }
 
+    &[data-is-continue="true"] {
+      .bg {
+        background-color: #66f;
+      }
+    }
+
     .number {
       display: block;
 

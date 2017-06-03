@@ -135,6 +135,8 @@ html.is-pc .wrapper {
       top: -0.2rem;
       background-color: #ccf;
       border-radius: 50%; }
+    .bion-container .bion-elm[data-is-continue="true"] .bg {
+      background-color: #66f; }
     .bion-container .bion-elm .number {
       display: block;
       position: absolute;
