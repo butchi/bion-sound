@@ -9,7 +9,7 @@ export default () => {
   const synthArr = new Array(TONE_LENGTH).fill(null).map(() => {
     return new Tone.Synth({
       "oscillator" : {
-        "type" : "square"
+        "type" : "sine"
       },
       "envelope" : {
         "attack" : 0.01,
