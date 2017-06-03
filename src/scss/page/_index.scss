@@ -28,6 +28,12 @@
       border-radius: 50%;
     }
 
+    &:hover {
+      .bg {
+        background-color: #99f;
+      }
+    }
+
     &[data-is-continue="true"] {
       .bg {
         background-color: #66f;
