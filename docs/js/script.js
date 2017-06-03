@@ -65,10 +65,6 @@ var _index = require('../page/index');
 
 var _index2 = _interopRequireDefault(_index);
 
-var _sub = require('../page/sub');
-
-var _sub2 = _interopRequireDefault(_sub);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -94,7 +90,6 @@ var Router = function () {
       (0, _common2.default)();
 
       page('index', _index2.default);
-      page('sub', _sub2.default);
     }
   }]);
 
@@ -103,7 +98,7 @@ var Router = function () {
 
 exports.default = Router;
 
-},{"../page/common":4,"../page/index":5,"../page/sub":6,"./ns":3}],3:[function(require,module,exports){
+},{"../page/common":4,"../page/index":5,"./ns":3}],3:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -175,23 +170,6 @@ exports.default = function () {
 },{"../module/ns":3}],6:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _ns = require('../module/ns');
-
-var _ns2 = _interopRequireDefault(_ns);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function () {
-  console.log('sub page');
-};
-
-},{"../module/ns":3}],7:[function(require,module,exports){
-'use strict';
-
 var _ns = require('./module/ns');
 
 var _ns2 = _interopRequireDefault(_ns);
@@ -206,4 +184,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _ns2.default.main = new _Main2.default();
 
-},{"./module/Main":1,"./module/ns":3}]},{},[7]);
+},{"./module/Main":1,"./module/ns":3}]},{},[6]);
