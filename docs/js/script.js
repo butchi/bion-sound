@@ -22627,6 +22627,24 @@ var _BMath = require('../module/BMath');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function () {
+  var SYNTH_LENGTH = 10;
+
+  var synthArr = new Array(SYNTH_LENGTH).fill(null).map(function () {
+    return new _tone2.default.Synth({
+      "oscillator": {
+        "type": "square"
+      },
+      "envelope": {
+        "attack": 0.01,
+        "decay": 0.8,
+        "sustain": 0.8,
+        "release": 0.2
+      }
+    }).toMaster();
+  });
+
+  var synthIndex = 0;
+
   var elm = document.querySelector('.bion-container');
   var $elm = $(elm);
 
@@ -22659,19 +22677,10 @@ exports.default = function () {
     var $b = $(evt.target).closest('.bion-elm');
     var freq = parseInt($b.attr('data-freq'));
 
-    var synth = new _tone2.default.Synth({
-      "oscillator": {
-        "type": "square"
-      },
-      "envelope": {
-        "attack": 0.01,
-        "decay": 0.8,
-        "sustain": 0,
-        "release": 0.2
-      }
-    }).toMaster();
+    var synth = synthArr[synthIndex];
+    synth.triggerAttackRelease(freq, 0.1);
 
-    synth.triggerAttack(freq);
+    synthIndex = (synthIndex + 1) % SYNTH_LENGTH;
   });
 };
 

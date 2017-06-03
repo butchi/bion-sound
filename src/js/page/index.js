@@ -5,6 +5,24 @@ import ns from '../module/ns';
 import { bion } from '../module/BMath';
 
 export default () => {
+  const SYNTH_LENGTH = 10;
+
+  const synthArr = new Array(SYNTH_LENGTH).fill(null).map(() => {
+    return new Tone.Synth({
+      "oscillator" : {
+        "type" : "square"
+      },
+      "envelope" : {
+        "attack" : 0.01,
+        "decay" : 0.8,
+        "sustain" : 0.8,
+        "release" : 0.2,
+      }
+    }).toMaster();
+  });
+
+  let synthIndex = 0;
+
   const elm = document.querySelector('.bion-container');
   const $elm = $(elm);
 
@@ -37,18 +55,9 @@ export default () => {
     const $b = $(evt.target).closest('.bion-elm');
     const freq = parseInt($b.attr('data-freq'));
 
-    var synth = new Tone.Synth({
-      "oscillator" : {
-        "type" : "square"
-      },
-      "envelope" : {
-        "attack" : 0.01,
-        "decay" : 0.8,
-        "sustain" : 0,
-        "release" : 0.2,
-      }
-    }).toMaster();
+    const synth = synthArr[synthIndex];
+    synth.triggerAttackRelease(freq, 0.1);
 
-    synth.triggerAttack(freq);
+    synthIndex = (synthIndex + 1) % SYNTH_LENGTH;
   });
 }
