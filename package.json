@@ -1,7 +1,7 @@
 {
-  "name": "butchi-web-starter-kit",
+  "name": "bion-sound",
   "version": "0.0.0",
-  "description": "description",
+  "description": "bion sound",
   "main": "gulpfile.babel.js",
   "engines": {
     "node": ">=6.9.1"
@@ -16,7 +16,7 @@
     "build-html": "gulp html"
   },
   "keywords": [
-    "starterkit"
+    "sound"
   ],
   "author": "IWABUCHI Yuuki",
   "license": "MIT",
